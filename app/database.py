@@ -28,4 +28,3 @@ def init_db() -> None:
 
     Base.metadata.create_all(bind=engine)
     models.seed_initial_data(engine)
-

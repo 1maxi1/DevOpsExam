@@ -3,7 +3,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
 
-from .database import Base, SessionLocal
+from .database import Base
 
 
 class Doctor(Base):
@@ -98,4 +98,3 @@ def seed_initial_data(engine: Engine) -> None:
             session.add_all(appointments)
 
         session.commit()
-

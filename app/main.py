@@ -86,4 +86,3 @@ def get_appointments_for_current_patient(
             )
         )
     return result
-

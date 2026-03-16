@@ -6,7 +6,6 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 
-from .database import get_db
 from .models import Appointment
 from .schemas import AuthRequest, Token
 
@@ -66,4 +65,3 @@ def login(auth_data: AuthRequest, db: Session) -> Token:
     phone = authenticate_user(auth_data, db)
     access_token = create_access_token(data={"sub": phone})
     return Token(access_token=access_token)
-
