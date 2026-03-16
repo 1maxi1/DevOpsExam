@@ -2,5 +2,5 @@
 set -euo pipefail
 
 bash ci/bootstrap_python.sh
-python3 -m pytest
+.ci-venv/bin/python -m pytest
 

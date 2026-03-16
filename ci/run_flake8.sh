@@ -2,5 +2,5 @@
 set -euo pipefail
 
 bash ci/bootstrap_python.sh
-python3 -m flake8
+.ci-venv/bin/python -m flake8
 
