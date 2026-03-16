@@ -1,5 +1,7 @@
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from . import auth, models, schemas
@@ -7,6 +9,7 @@ from .database import get_db, init_db
 from .schemas import AuthRequest, Token, AppointmentWithDoctor, DoctorBase
 
 app = FastAPI(title="Приложение записи на прием к врачу")
+templates = Jinja2Templates(directory="app/templates")
 
 app.add_middleware(
     CORSMiddleware,
@@ -15,6 +18,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/", response_class=HTMLResponse, summary="Веб-интерфейс приложения")
+def read_root(request: Request) -> HTMLResponse:
+    """
+    Веб-интерфейс для работы с приложением:
+    логин, просмотр расписания и своих записей.
+    """
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.on_event("startup")
